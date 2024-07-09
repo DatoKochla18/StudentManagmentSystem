@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock title %}
+{% block content %}
+<div >
+<h1 >Managment app</h1>
+<p >A Student Managment website built with Django.</p>
+<p >
+<a  href="{% url 'course_list' %}"
+>View All Courses</a>
+<a  href="{% url 'my_courses' %}">my_courses</a>
+{%if user.is_teacher_user%}
+<a  href="{% url 'course_new' %}">Create Course</a>
+{%endif%}
+
+</p>
+</div>
+{% endblock content %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Courses{% endblock title %}
+{% block content %}
+{% for course in object_list %}
+<div >
+<div >
+<span >{{ course.name }}</span> &middot;
+<span >by {{ course.teacher }} </span>
+</div>
+ <a href="{% url 'course_detail' course.pk %}">Details</a>
+ {% if course.teacher_id == user.id %}
+ <a href="{% url 'update_course' course.pk %}">Update</a>
+ <a href="{% url 'delete_course' course.pk %}">Delete</a>
+{% endif %}
+
+ <div >
+{{ course.description }}
+</div>
+<div >
+</div>
+</div>
+<br />
+{% endfor %}
+{% endblock content %}

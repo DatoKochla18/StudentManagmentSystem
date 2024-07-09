@@ -1,0 +1,13 @@
+<h1>{{ course.name }}</h1>
+<p>{{ course.description }}</p>
+<p>Category: {{ course.category }}</p>
+<p>Instructor: {{ course.teacher }}</p>
+
+{% if user.is_authenticated and user.is_student_user and not is_enrolled  %}
+    <form action="{% url 'enroll' course.pk %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Enroll</button>
+    </form>
+{% endif %}
+
+<a href="/">home</a>

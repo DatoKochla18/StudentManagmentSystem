@@ -1,0 +1,36 @@
+
+{% for course in enroll %}
+<div >
+
+    <div >
+<span >{{ course.name }}</span> &middot;
+
+
+<span >by {{ course.teacher }} </span> 
+</div>
+
+<div >
+{{ course.description }}
+
+
+</div>
+<a href="{% url 'course_detail' course.pk %}">Details</a>
+{% if user.is_teacher_user %}
+<a href="{% url 'update_course' course.pk %}">Update</a>
+<a href="{% url 'delete_course' course.pk %}">Delete</a>
+{% endif %}
+
+</div>
+<div >
+</div>
+</div>
+<br />
+{% endfor %}
+{% if user.is_teacher_user %}
+{% if user.is_authenticated %}
+<li><a href="{% url 'course_new' %}" >+ New</a></li>
+{% endif %}
+{% endif %}
+<li><a href="/" >home</a></li>
+
+

@@ -1,0 +1,28 @@
+<!-- forum_list.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Forum List for {{ course.name }}</title>
+</head>
+<a href="/">home</a>
+<body>
+    <h1>Forum for {{ course.name }}</h1>
+    <ul>
+        {% for forum in forums %}
+        <li>
+            <p>{{ forum.message }}</p> <a href="{% url 'forum_delete' forum.pk %}">Delete </a>
+            <p>Posted by {{ forum.customer }} on {{ forum.created }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Add a new message</h2>
+    <form action="{% url 'create_forum_post' course.pk %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Message</button>
+
+    </form>
+    
+</body>
+</html>

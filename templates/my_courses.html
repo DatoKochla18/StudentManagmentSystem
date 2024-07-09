@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Course List</title>
+</head>
+<body>
+    <h1>Course List</h1>
+    <ul>
+        {% for course in courses %}
+        <li>
+            <h2>{{ course.name }}</h2>
+            <p>{{ course.description }}</p>
+            {% if user.is_student_user %}
+                {% if course.completed %}
+                    <p>Completed</p>
+                    <form action="{% url 'uncomplete_course' course.pk %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">Mark As Uncompleted</button>
+                    </form>
+                {% else %}
+                    <p>Not Completed</p>
+                    <form action="{% url 'complete_course' course.pk %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">Mark As Completed</button>
+                    </form>
+                {% endif %}
+                <a href="{% url 'course_detail' course.pk %}">Details</a>
+                <a href="{% url 'forum_list' course.pk %}">Forum</a>
+
+            {% else %}
+                <a href="{% url 'update_course' course.pk %}">Update</a>
+                <a href="{% url 'delete_course' course.pk %}">Delete</a>
+                <a href="{% url 'course_detail' course.pk %}">Details</a>
+                <a href="{% url 'forum_list' course.pk %}">Forum</a>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="/">Home</a>
+</body>
+</html>
