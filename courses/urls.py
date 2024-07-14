@@ -5,9 +5,6 @@ from .views import CourseCreateView,CourseListView,CourseDetailView,enroll_in_co
     
 
 urlpatterns = [
-#    path('<int:pk>/edit/',ArticleUpdateView.as_view(), name='article_edit'), # new
-#path('<int:pk>/',ArticleDetailView.as_view(), name='article_detail'), # new
-#path('<int:pk>/delete/',ArticleDeleteView.as_view(), name='article_delete'), # new
 path('', CourseListView.as_view(), name='course_list'),
 path('<int:pk>',CourseDetailView.as_view(), name='course_detail'),
 path('enroll/<int:pk>', enroll_in_course, name='enroll'),

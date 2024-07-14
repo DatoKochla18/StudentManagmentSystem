@@ -39,10 +39,8 @@ class CourseDetailView(LoginRequiredMixin,DetailView):
         user = self.request.user
         course = self.get_object()
         
-        # Check if the user is enrolled in the course
         is_enrolled = Enrollment.objects.filter(student=user, course=course).exists()
         
-        # Add the 'is_enrolled' status to the context
         context['is_enrolled'] = is_enrolled
         return context
     
